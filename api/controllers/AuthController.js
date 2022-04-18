@@ -4,12 +4,13 @@ const CipherService = require('../services/CipherService');
 
 module.exports={
     login_view : function(req,res){
-		res.view('partials/login',{	layout:"template",	})
+		res.view('partials/login',{	layout:"template"	})
 	},
 
-    tmp:function(req,res){
-        res.ok()
+    home : function(req,res){
+		res.view('partials/home',{	layout:"template"	})
     },
+
 
     login: async function (req, res) {
 		if (!req.body.email || !req.body.password) {
@@ -49,7 +50,8 @@ module.exports={
 									httpOnly: true,
 									signed:true
 								});
-								return res.redirect('/tmp')
+								res.locals.user=emp
+								return res.redirect('/home')
 							}
 						})
 					}
@@ -60,4 +62,73 @@ module.exports={
 			return res.serverError("Try <a href='/login'>Signing in</a>  again! ")
 		}
 	},
+
+
+	signup_view : function(req,res){
+		res.view('partials/signup',{
+			layout:'template'
+		})
+	},
+	signup: async function (req, res) {
+			logger.info("SIGN Up Body   :   ", req.body);
+			if (
+				!req.body.name ||
+				!req.body.email ||
+				!req.body.password
+			) {
+				return res.view('partials/signup',{
+					status: 'error',
+					layout:"template",
+					message:"All fields are mandatory"
+				});
+			}
+			
+			let existingEmail = await Employee.findOne({
+				email: req.body.email,
+			});
+			if (existingEmail) {
+				return res.view('partials/signup',{
+					status: 'error',
+					layout:"template",
+					message:"Email already registered"
+				});
+			}
+			else{
+			let empData = {
+				name: req.body.name,
+				email: req.body.email,
+				password:req.body.password,
+				role: (await Role.findOne({role:'EMPLOYEE'})).id
+			};
+			try {
+				let emp = await Employee.create(empData);
+				if (!emp) {
+					return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
+				}
+				else{
+					req.emp=emp;
+					res.locals.user = emp;
+					res.cookie('jwt', CipherService.createToken(emp), {
+						secure: req.connection.encrypted ? true : false,
+						httpOnly: true,
+						signed:true
+					});
+					return res.redirect('/home')	
+				}
+			} catch (err) {
+				logger.error('Following error is generated: ' + err);
+				return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
+			}
+		}
+	},
+
+	logout: async function (req, res) {
+		req.emp=null;
+		res.cookie('jwt', null, {
+			secure: req.connection.encrypted ? true : false,
+			httpOnly: true
+		  });
+		req.session.destroy();
+		res.redirect('/login')
+	}
 };

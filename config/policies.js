@@ -50,7 +50,7 @@ module.exports.policies = {
 	// }
 
   AuthController:{
-    tmp:['isAuthenticated','isAdmin']
+    home:['isAuthenticated']
   }
 };
 

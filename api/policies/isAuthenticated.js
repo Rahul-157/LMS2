@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
 			return res.serverError(error);
 		}
 		if (!user) {
-			return res.forbidden("Please Login.")
+			return res.redirect("/login")
 		}
         req.emp = user;
 		next();

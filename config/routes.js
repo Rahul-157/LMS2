@@ -32,9 +32,14 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /tmp' :'AuthController.tmp',
+  'GET /home' :'AuthController.home',
 	'GET /login': 'AuthController.login_view',
 	'POST /login': 'AuthController.login',
+
+  'GET /signup': 'AuthController.signup_view',
+	'POST /signup': 'AuthController.signup',
+
+  'GET /logout' : 'AuthController.logout'
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
