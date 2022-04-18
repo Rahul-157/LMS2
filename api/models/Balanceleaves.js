@@ -1,7 +1,7 @@
 const uuid = require('node-uuid');
 
 module.exports = {
-//reate table balanceleaves(id char(36), type char(36),employee char(36), balance int);
+//create table balanceleaves(id char(36), type char(36),employee char(36), balance int);
 
 	attributes: {
         id:{

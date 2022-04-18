@@ -18,7 +18,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.connections.html
  */
-require ('dontenv').config();
+require ('dotenv').config();
 module.exports.connections = {
 
   /***************************************************************************
