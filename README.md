@@ -2,7 +2,7 @@
 
 a [Sails](http://sailsjs.org) application
 
-
+```
 Nodejs Version : 12.22
 Mysql 5.7 ( server and client)
 Check
@@ -26,7 +26,7 @@ Run
     sails lift
 
 
-
+```
 
 
 
