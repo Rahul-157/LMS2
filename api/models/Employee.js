@@ -27,6 +27,10 @@ module.exports = {
             collection: 'leaves',
             via: 'employee'
         },
+		balanceLeaves:{
+			collection: 'leaves',
+            via: 'employee'
+		},
 		toJSON: function () {
 			var obj = this.toObject();
 			return obj;

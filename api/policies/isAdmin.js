@@ -1,5 +1,4 @@
 module.exports = function (req, res, next) {
-	
         if(!req.emp){
             res.badRequest("Please login");
         }

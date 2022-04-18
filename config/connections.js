@@ -18,7 +18,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.connections.html
  */
-
+require ('dontenv').config();
 module.exports.connections = {
 
   /***************************************************************************
@@ -43,8 +43,8 @@ module.exports.connections = {
   someMysqlServer: {
     adapter: 'sails-mysql',
     host: 'localhost',
-    user: 'root', //optional
-    password: 'root', //optional
+    user: process.env.dbuser, //optional
+    password: process.env.dbpass, //optional
     database: 'lms' //optional
   },
 
