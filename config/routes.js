@@ -35,11 +35,14 @@ module.exports.routes = {
   'GET /home' :'AuthController.home',
 	'GET /login': 'AuthController.login_view',
 	'POST /login': 'AuthController.login',
-
   'GET /signup': 'AuthController.signup_view',
 	'POST /signup': 'AuthController.signup',
+  'GET /logout' : 'AuthController.logout',
 
-  'GET /logout' : 'AuthController.logout'
+  'POST /applyLeave': 'LeaveController.applyLeave',
+  'GET /manageLeaveApplication':'LeaveController.manageLeaveApplication',
+  'GET /approve/:leaveId' : 'LeaveController.approveLeave',
+  'GET /reject/:leaveId' : 'LeaveController.rejectLeave',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

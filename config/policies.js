@@ -51,6 +51,12 @@ module.exports.policies = {
 
   AuthController:{
     home:['isAuthenticated']
+  },
+  LeaveController:{
+    'applyLeave':['isAuthenticated'],
+    'manageLeaveApplication':['isAuthenticated','isAdmin'],
+    'approveLeave':['isAuthenticated','isAdmin'],
+    'rejectLeave':['isAuthenticated','isAdmin']
   }
 };
 

@@ -29,7 +29,6 @@ module.exports = {
 		delete settings.secretOrKey;
 		delete settings.jwtFromRequest;
 		delete settings.passReqToCallback;
-
 		return jwt.sign({
 				user: user.toJSON(),
 			},
