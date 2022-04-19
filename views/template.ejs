@@ -47,7 +47,11 @@
           <div class="alert alert-danger alert-dismissible fade in" style="margin-bottom: 5px;position:fixed;z-index: 2001;width:100%">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong><%- message %></strong>
-            <% } %>
+        <% } else if(status=="error-persistent") { %>
+          <div class="alert-persistent alert-danger alert-dismissible fade in" style="margin-bottom: 5px;position:fixed;z-index: 2001;width:100%">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%- message %></strong>
+        <% } %>
       </div>
     </div>
   <% } %>
@@ -55,6 +59,10 @@
     let flash_msg = document.getElementsByClassName('alert');
     if(flash_msg.length!=0){
       setTimeout(function(){ flash_msg[0].remove() }, 3000);
+    }
+    let flash_msg_persistent = document.getElementsByClassName('alert-persistent');
+    if(flash_msg_persistent.length!=0){
+      setTimeout(function(){ flash_msg_persistent[0].remove() }, 10000);
     }
    
   </script>

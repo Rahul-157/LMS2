@@ -2,6 +2,7 @@ const LeaveService = require("../services/LeaveService");
 
 module.exports={
     applyLeave : function(req,res){
+        res.locals.user=req.emp;
 		if(!req.body.leaveType    || !req.body.fromDate || !req.body.toDate){
             return res.view('partials/applyLeave',
                         {	
@@ -39,59 +40,42 @@ module.exports={
         });
 	},
 
-    manageLeaveApplication: async function(req,res){
-        let pendingLeaves = await Leaves.find({status:'PENDING'});
-        let rejectedLeaves = await Leaves.find({status:'REJECTED'});
-        let approvedLeaves = await Leaves.find({status:'APPROVED'});
-        return res.json(pendingLeaves.concat(rejectedLeaves.concat(approvedLeaves)));
+    
+
+
+    my_leaves : async function(req,res){
+		res.locals.user=req.emp
+        let pendingLeaves = await Leaves.find({status:'PENDING',employee:req.emp.id});
+        let sickLeaves = await LeaveService.getAvailableLeaves(req.emp.id,"SICK_LEAVE");
+        let casualLeaves = await LeaveService.getAvailableLeaves(req.emp.id,"CASUAL_LEAVE");
+        let studyLeaves = await LeaveService.getAvailableLeaves(req.emp.id,"STUDY_LEAVE");
+        return  res.view('partials/manageLeaveTypes',
+            {	
+                layout:"template", 
+                data:{
+                    leaves:pendingLeaves,
+                    sickLeaveAvailable:sickLeaves.balance,
+                    casualLeaveAvailable:casualLeaves.balance,
+                    studyLeaveAvailable:studyLeaves.balance
+                }
+            }
+        );
     },
 
-    approveLeave: async function(req,res){
+    
+    deleteLeave: async function(req,res){
+		res.locals.user=req.emp
         let leaveId = req.params.leaveId;
-        let leave;
-        try{
-            leave = await Leaves.update({id:leaveId}).set({status:"APPROVED"})
-            return res.view('partials/manageLeaveApplication',
+        let leave =  await LeaveService.deleteLeave(leaveId,req.emp.id);
+        if(leave.err)
+            return res.view('partials/manageLeaveTypes',
                 {	
                     layout:"template", 
-                    status:"success",
-                    message: "Approved"
+                    status:"error-persistent",
+                    message: leave.err + "Click <a href='/my_leaves'>here</a>"
                 }
             );
-        }catch(err){
-            console.log(err)
-            return res.view('partials/manageLeaveApplication',
-                {	
-                    layout:"template", 
-                    status:"error",
-                    message: err.message
-                }
-            );
-           
-        }
-    },
-    rejectLeave: async function(req,res){
-        let leaveId = req.params.leaveId;
-        let leave;
-        try{
-            leave = await Leaves.update({id:leaveId}).set({status:"REJECTED"})
-            return res.view('partials/manageLeaveApplication',
-                {	
-                    layout:"template", 
-                    status:"success",
-                    message: "Rejected"
-                }
-            );
-        }catch(err){
-            console.log(err)
-            return res.view('partials/manageLeaveApplication',
-                {	
-                    layout:"template", 
-                    status:"error",
-                    message: err.message
-                }
-            );
-           
-        }
+        return res.redirect("/my_leaves")
+
     }
 };
