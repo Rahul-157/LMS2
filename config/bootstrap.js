@@ -13,38 +13,41 @@
 
 
  module.exports.bootstrap = async function(cb) {
-	await Role.destroy({});
-	await Leavetype.destroy({});
-	await Leaves.destroy({});
-	await Employee.destroy({});
-	await Balanceleaves.destroy({});
-    let admin  =  await Role.create({
-		role: "ADMIN"
-	});
-	await Role.create({
-		role: "EMPLOYEE"
-	});
-
-	await Leavetype.create({
-		type: 'SICK_LEAVE',
-	});
-
-	await Leavetype.create({
-		type: 'CASUAL_LEAVE',
-	});
-
-	await Leavetype.create({
-		type: 'STUDY_LEAVE',
-	});
-
-	await EmployeeService.createEmployee({
-		name: 'Admin',
-		password: 'admin@rocks',
-		email:'a@b.c',
-		role: admin.id
-	},function(err,emp){
-		if(err)
-			throw err;
-	});
+	let roles = await Role.count({})
+	if(!roles || roles==0){
+		await Role.destroy({});
+		await Role.create({
+			role: "ADMIN"
+		});
+		await Role.create({
+			role: "EMPLOYEE"
+		});
+	}
+	let leavetypes=await Leavetype.count({})
+	if(!leavetypes || leavetypes==0){
+		await Leavetype.destroy({});
+		await Leavetype.create({
+			type: 'SICK_LEAVE',
+		});
+	
+		await Leavetype.create({
+			type: 'CASUAL_LEAVE',
+		});
+	
+		await Leavetype.create({
+			type: 'STUDY_LEAVE',
+		});
+	}
+	let adminEmp = Employee.findOne({email:"a@b.c"});
+	if(!adminEmp)
+		await EmployeeService.createEmployee({
+			name: 'Admin',
+			password: 'admin@rocks',
+			email:'a@b.c',
+			role: await Role.findOne({role:'ADMIN'})
+		},function(err,emp){
+			if(err)
+				throw err;
+		});
   cb()
 };
