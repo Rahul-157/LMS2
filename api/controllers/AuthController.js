@@ -7,11 +7,6 @@ module.exports={
 		res.view('partials/login',{	layout:"template"	})
 	},
 
-    home : function(req,res){
-		res.view('partials/home',{	layout:"template"	})
-    },
-
-
     login: async function (req, res) {
 		if (!req.body.email || !req.body.password) {
 			return res.view('partials/login',{
@@ -51,7 +46,7 @@ module.exports={
 									signed:true
 								});
 								res.locals.user=emp
-								return res.redirect('/home')
+								return res.redirect('/login')
 							}
 						})
 					}
@@ -116,7 +111,7 @@ module.exports={
 						console.log('Following error is generated: ' + err);
 						return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
 					}
-					return res.redirect('/home')
+					return res.redirect('/login')
 				}
 			});
 			

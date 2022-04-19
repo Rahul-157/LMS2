@@ -32,7 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /home' :'AuthController.home',
+  'GET /dashboard' :'AdminController.dashboard',
 	'GET /login': 'AuthController.login_view',
 	'POST /login': 'AuthController.login',
   'GET /signup': 'AuthController.signup_view',
