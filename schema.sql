@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `balanceleaves`
+--
+
+DROP TABLE IF EXISTS `balanceleaves`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `balanceleaves` (
+  `id` char(36) DEFAULT NULL,
+  `type` char(36) DEFAULT NULL,
+  `employee` char(36) DEFAULT NULL,
+  `balance` int(11) DEFAULT NULL,
+  `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `balanceleaves`
+--
+
+LOCK TABLES `balanceleaves` WRITE;
+/*!40000 ALTER TABLE `balanceleaves` DISABLE KEYS */;
+/*!40000 ALTER TABLE `balanceleaves` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `employee`
 --
 
@@ -39,7 +65,6 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('Admin','a@b.c','$2a$10$uka2pg6p1CnC9rITbGKmLuO8BZCq98eANa9ZLKBy/aNtjMZGk2qnO','867f3bf9-2128-4f70-86a4-79954de78cb1','088a035e-3da9-4ea6-8e0f-de6f9acb0d0c','2022-04-18 18:33:34','2022-04-18 18:33:34');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +120,6 @@ CREATE TABLE `leavetype` (
 
 LOCK TABLES `leavetype` WRITE;
 /*!40000 ALTER TABLE `leavetype` DISABLE KEYS */;
-INSERT INTO `leavetype` VALUES ('2ae0a0eb-0d1c-4e93-82c9-98444221d016','SICK_LEAVE','2022-04-18 18:33:34','2022-04-18 18:33:34'),('40605392-9e87-4683-89f9-401e8fec9b3b','CASUAL_LEAVE','2022-04-18 18:33:34','2022-04-18 18:33:34'),('e2cffb39-fea2-4d80-873b-33ed4073df80','STUDY_LEAVE','2022-04-18 18:33:34','2022-04-18 18:33:34');
 /*!40000 ALTER TABLE `leavetype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +146,6 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES ('4df0e526-e933-4274-b675-1db91ea67282','EMPLOYEE','2022-04-18 18:33:34','2022-04-18 18:33:34'),('867f3bf9-2128-4f70-86a4-79954de78cb1','ADMIN','2022-04-18 18:33:34','2022-04-18 18:33:34');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-18 18:56:13
+-- Dump completed on 2022-04-19 15:51:06

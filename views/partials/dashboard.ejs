@@ -5,6 +5,11 @@
             </div>     
 
             <div style="padding-top:30px" class="panel-body" >
+                <style>
+                    tr, td {
+                     padding: 5px;
+                     }
+                     </style>
                 <table>
                     <% if(typeof data!='undefined')
                         { %>
@@ -37,9 +42,3 @@
             
             </div>  
 </div>
-
-<% if (typeof data!='undefined'){ %>
-    <div>
-        <%- JSON.stringify(data) %>
-    </div>
-    <% } %>
