@@ -1,4 +1,5 @@
-<div id="myleaves" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-3 col-sm-1 col-sm-offset-2">                    
+
+   <div id="myleaves" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-3 col-sm-1 col-sm-offset-2">                    
     <div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title">Manage Leaves</div>
@@ -13,19 +14,25 @@
                 <table >
                     <tr>
                         <td> Leave type</td>
+                        <td> Leave Status</td>
                         <td> From Date</td>
                         <td> To Date</td>
-                        <td> Action</td>
+                        <td> Approve</td>
+                        <td> Reject</td>
                     </th>
 
                    
                 <% if(typeof data!='undefined'){ 
+                 
                       for(var i =0;i < data.length;i++){ %>
                     <tr>
                         <td> <%= data[i].type %> </td>
+                        <td> <%= data[i].status %> </td>
                         <td>  <%= data[i].fromDate %> </td>
                         <td> <%= data[i].toDate %> </td>
-                        <td> <a href="/delete_leave/<%=data[i].id%>">Delete</a> </td>
+                        
+                        <td> <a href="/approve_leave/<%=data[i].id%>">Approve</a> </td>
+                        <td> <a href="/reject_leave/<%=data[i].id%>">Reject</a> </td>
                     </tr>
                     <% } } %>
                 </table>
@@ -34,5 +41,7 @@
             </div></div>
             </div>
             
+
+
 
 
