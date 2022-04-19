@@ -6,30 +6,32 @@
 
             <div style="padding-top:30px" class="panel-body" >
                 <table>
+                    <% if(typeof data!='undefined')
+                        { %>
                     <tr>
-                        <td> Icon and Number of Employees</td>
-                        <td> Number</td>
+                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-lock">Number of Employees</i></span></td>
+                        <td> <%= data.totalEmp %></td>
                     </tr>
 
                     <tr> 
-                        <td> Icon and number of leaves</td>
-                        <td> Number</td>
+                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-plane">Number of Leaves</i></span></td>
+                        <td> <%= data.totalLeaves %></td>
                     </tr>
 
                     <tr> 
-                        <td> Icon and number of approved applications</td>
-                        <td> Number</td>
+                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle">Number of approved applications</i></span></td>
+                        <td> <%= data.approvedLeaves %></td>
                     </tr>
 
                     <tr> 
-                        <td> Icon and number of Cancelled applications</td>
-                        <td> Number</td>
+                        <td><span class="input-group-addon"><i class="glyphicon glyphicon-remove">Number of Cancelled applications</i></span> </td>
+                        <td> <%= data.rejectedLeaves %></td>
                     </tr>
 
                     <tr> 
-                        <td> Icon and number of Pending applications</td>
-                        <td> Number</td>
-                    </tr>
+                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-repeat">Number of Pending applications</i></span></td>
+                        <td> <%= data.pendingLeaves %></td>
+                    </tr> <% } %>
                 </table>
 
             
