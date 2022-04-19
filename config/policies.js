@@ -54,12 +54,11 @@ module.exports.policies = {
   },
   LeaveController:{
     'applyLeave':['isAuthenticated'],
-    'manageLeaveApplication':['isAuthenticated','isAdmin'],
-    'approveLeave':['isAuthenticated','isAdmin'],
-    'rejectLeave':['isAuthenticated','isAdmin']
+    'my_leaves':['isAuthenticated'],
+    'deleteLeave':['isAuthenticated'],
   },
   AdminController:{
-    'dashboard':['isAuthenticated','isAdmin']
+    '*':['isAuthenticated','isAdmin']
   }
 };
 

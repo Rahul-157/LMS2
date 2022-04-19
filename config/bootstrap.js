@@ -12,14 +12,13 @@
 
 
 
-
  module.exports.bootstrap = async function(cb) {
 	await Role.destroy({});
 	await Leavetype.destroy({});
 	await Leaves.destroy({});
 	await Employee.destroy({});
 	await Balanceleaves.destroy({});
-    await Role.create({
+    let admin  =  await Role.create({
 		role: "ADMIN"
 	});
 	await Role.create({
@@ -38,13 +37,14 @@
 		type: 'STUDY_LEAVE',
 	});
 
-	let admin  = await Role.findOne({role:"ADMIN"})
-	await Employee.create({
+	await EmployeeService.createEmployee({
 		name: 'Admin',
 		password: 'admin@rocks',
 		email:'a@b.c',
 		role: admin.id
+	},function(err,emp){
+		if(err)
+			throw err;
 	});
-
   cb()
 };

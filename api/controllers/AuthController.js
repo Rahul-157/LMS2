@@ -46,7 +46,7 @@ module.exports={
 									signed:true
 								});
 								res.locals.user=emp
-								return res.redirect('/login')
+								return res.redirect('/my_leaves')
 							}
 						})
 					}
@@ -111,7 +111,7 @@ module.exports={
 						console.log('Following error is generated: ' + err);
 						return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
 					}
-					return res.redirect('/login')
+					return res.redirect('/my_leaves')
 				}
 			});
 			

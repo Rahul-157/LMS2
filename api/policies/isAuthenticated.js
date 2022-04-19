@@ -8,6 +8,9 @@ module.exports = function (req, res, next) {
 		if (!user) {
 			return res.redirect("/login")
 		}
+		let userExists = await Employee.findOne({id:user.id});
+		if(!userExists)
+			return  res.redirect('/logout')
         req.emp = user;
 		next();
 	})(req, res);
