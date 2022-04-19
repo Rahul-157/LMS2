@@ -53,7 +53,8 @@ module.exports.policies = {
     home:['isAuthenticated']
   },
   LeaveController:{
-    'applyLeave':['isAuthenticated'],
+    'apply_leave':['isAuthenticated'],
+    'apply_leave_view':['isAuthenticated'],
     'my_leaves':['isAuthenticated'],
     'deleteLeave':['isAuthenticated'],
   },

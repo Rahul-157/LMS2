@@ -12,6 +12,7 @@ module.exports = function (req, res, next) {
 		if(!userExists)
 			return  res.redirect('/logout')
         req.emp = user;
+		res.locals.user=user
 		next();
 	})(req, res);
 }; 

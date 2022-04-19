@@ -1,50 +1,38 @@
-<div id="myleaves" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+<div id="myleaves" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-3 col-sm-1 col-sm-offset-2">                    
     <div class="panel panel-info" >
             <div class="panel-heading">
-                <div class="panel-title">Apply for leave</div>
+                <div class="panel-title">Manage Leaves</div>
             </div>     
 
             <div style="padding-top:30px" class="panel-body" > 
-            
-                <table>
+                <style>
+                   tr, td {
+                    padding: 15px;
+                    }
+                    </style>
+                <table >
                     <tr>
                         <td> Leave type</td>
-                        <td> Description</td>
-                        <td> Period of leave</td>
-                        <td> Date of Application</td>
+                        <td> From Date</td>
+                        <td> To Date</td>
                         <td> Action</td>
-                    </tr>
+                    </th>
 
+                   
+                <% if(typeof data!='undefined'){ 
+                      for(var i =0;i < data.length;i++){ %>
                     <tr>
-                        <td> Sick Leave</td>
-                        <td> Sick leave</td>
-                        <td> Dynamic Number</td>
-                        <td> Number from database</td>
-                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span></td>
+                        <td> <%= data[i].type %> </td>
+                        <td>  <%= data[i].fromDate %> </td>
+                        <td> <%= data[i].toDate %> </td>
+                        <td> <a href="/delete_leave/<%=data[i].id%>">Delete</a> </td>
                     </tr>
-
-                    <tr>
-                        <td> Casual Leave</td>
-                        <td> Casual leave</td>
-                        <td> Dynamic Number</td>
-                        <td> Number from database</td>
-                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span></td>
-                    </tr>
-
-                    <tr>
-                        <td> Study Leave</td>
-                        <td> Study leave</td>
-                        <td> Dynamic Number</td>
-                        <td> Number from database</td>
-                        <td> <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span></td>
-                    </tr>
+                    <% } } %>
                 </table>
             
             
+            </div></div>
             </div>
+            
 
-<% if (typeof data!='undefined'){ %>
-    <div>
-        <%- JSON.stringify(data) %>
-    </div>
-    <% } %>
+

@@ -38,10 +38,12 @@ module.exports.routes = {
 	'POST /signup': 'AuthController.signup',
   'GET /logout' : 'AuthController.logout',
 
-  'POST /apply_leave': 'LeaveController.applyLeave',
+  'POST /apply_leave': 'LeaveController.apply_leave',
+  'GET /apply_leave': 'LeaveController.apply_leave_view',
+
   'GET /my_leaves':'LeaveController.my_leaves',
   'GET /delete_leave/:leaveId':'LeaveController.deleteLeave',
-  
+
   'GET /approve_leave/:leaveId' : 'AdminController.approveLeave',
   'GET /reject_leave/:leaveId' : 'AdminController.rejectLeave',
   'GET /dashboard' :'AdminController.dashboard',

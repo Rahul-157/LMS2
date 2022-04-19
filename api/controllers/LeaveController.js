@@ -1,8 +1,15 @@
 const LeaveService = require("../services/LeaveService");
 
 module.exports={
-    applyLeave : function(req,res){
-        res.locals.user=req.emp;
+    apply_leave_view : function(req,res){
+        return res.view('partials/applyLeave',
+                        {	
+                            layout:"template"
+                        }
+                    );
+    },
+    apply_leave : function(req,res){
+        console.log(req.body)
 		if(!req.body.leaveType    || !req.body.fromDate || !req.body.toDate){
             return res.view('partials/applyLeave',
                         {	
@@ -44,7 +51,6 @@ module.exports={
 
 
     my_leaves : async function(req,res){
-		res.locals.user=req.emp
         let pendingLeaves = await Leaves.find({status:'PENDING',employee:req.emp.id});
         let sickLeaves = await LeaveService.getAvailableLeaves(req.emp.id,"SICK_LEAVE");
         let casualLeaves = await LeaveService.getAvailableLeaves(req.emp.id,"CASUAL_LEAVE");
@@ -64,7 +70,6 @@ module.exports={
 
     
     deleteLeave: async function(req,res){
-		res.locals.user=req.emp
         let leaveId = req.params.leaveId;
         let leave =  await LeaveService.deleteLeave(leaveId,req.emp.id);
         if(leave.err)

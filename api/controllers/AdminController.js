@@ -1,6 +1,5 @@
 module.exports={
     dashboard : async function(req,res){
-		res.locals.user=req.emp
 		let totalEmp = await Employee.count({});
 		let pendingLeaves = await Leaves.count({status:'PENDING'});
 		let approvedLeaves = await Leaves.count({status:'APPROVEED'});
@@ -20,7 +19,6 @@ module.exports={
 	},
 
 	manage_leaves: async function(req,res){
-		res.locals.user=req.emp
         let pendingLeaves = await Leaves.find({status:'PENDING'});
         let rejectedLeaves = await Leaves.find({status:'REJECTED'});
         let approvedLeaves = await Leaves.find({status:'APPROVED'});
@@ -33,7 +31,6 @@ module.exports={
     },
 
 	approveLeave: async function(req,res){
-		res.locals.user=req.emp
         let leaveId = req.params.leaveId;
         let leave;
         try{
@@ -52,7 +49,6 @@ module.exports={
         }
     },
     rejectLeave: async function(req,res){
-		res.locals.user=req.emp
         let leaveId = req.params.leaveId;
         let leave;
         try{

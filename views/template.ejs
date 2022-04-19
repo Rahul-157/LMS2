@@ -72,11 +72,24 @@
       <div class="navbar-header">
         <input type="button" class="navbar-toggle" style='border-radius:40px;width:40px;background: url("/images/ham.png") no-repeat;background-size: 40px 40px;' data-toggle="collapse" data-target="#myNavbar">
      
-        <a href='/'><img src='/images/logo.png' style="position: relative;top: 3px; margin-right: 10px;" height="40" width="40"></a>
   
-        <a class="navbar-brand" href="/">Leave Management System</a>
+        <a class="navbar-brand" href="/my_leaves">Leave Management System</a>
       </div>
-      
+      <ul class="nav navbar-nav navbar-left">
+        <li class="sidebar-nav-li">
+          <a href="/dashboard">Dashboard</a>
+        </li >
+        <li class="sidebar-nav-li">
+          <a href="/manage_leaves">Manage Leave Applications</a>
+        </li>
+        <li class="sidebar-nav-li">
+          <a href="/apply_leave">Apply for Leave</a>
+        </li>
+        <li class="sidebar-nav-li">
+          <a href="/my_leaves">Manage Leave Type</a>
+        </li>
+       
+      </ul>
        
         <ul class="nav navbar-nav navbar-right">
           <% if (typeof user!='undefined' ){%>
@@ -93,31 +106,10 @@
   <br>
   <br>
   
-  <div id="wrapper" style="border-width:2px; border-style:solid; border-color:black; width: 20%; position:fixed; top:25;">
-    <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-li">
-          <a href="/dashboard">Dashboard</a>
-        </li >
-        <li class="sidebar-nav-li">
-          <a href="/manage_leaves">Manage Leave Applications</a>
-        </li>
-        <li class="sidebar-nav-li">
-          <a href="/apply_leave">Apply for Leave</a>
-        </li>
-        <li class="sidebar-nav-li">
-          <a href="/my_leaves">Manage Leave Type</a>
-        </li>
-       
-      </ul>
-    </div>
-         
-    <div id="page-content-wrapper" style="position:fixed; top:5; left: 60; ">
-      <%- body %>
-    </div>
 
+  <div id="page-content-wrapper" style="position:fixed; top:5; left: 60; ">
+    <%- body %>
   </div>
-     
 
     <!--
         Client-side Templates
