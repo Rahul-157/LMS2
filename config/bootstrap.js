@@ -14,14 +14,14 @@
 
 
  module.exports.bootstrap = async function(cb) {
-  await Role.destroy({});
-  await Leavetype.destroy({});
-  await Employee.destroy({});
-
-   await Role.create({
+	await Role.destroy({});
+	await Leavetype.destroy({});
+	await Leaves.destroy({});
+	await Employee.destroy({});
+	await Balanceleaves.destroy({});
+    await Role.create({
 		role: "ADMIN"
 	});
-
 	await Role.create({
 		role: "EMPLOYEE"
 	});
@@ -33,6 +33,7 @@
 	await Leavetype.create({
 		type: 'CASUAL_LEAVE',
 	});
+
 	await Leavetype.create({
 		type: 'STUDY_LEAVE',
 	});

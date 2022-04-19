@@ -17,7 +17,7 @@ module.exports = {
 			model:'employee'
 		},
         balance: {
-            type:'number'
+            type: 'string'
         },
         toJSON: function () {
 			var obj = this.toObject();

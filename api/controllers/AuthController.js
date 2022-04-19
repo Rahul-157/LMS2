@@ -100,25 +100,26 @@ module.exports={
 				password:req.body.password,
 				role: (await Role.findOne({role:'EMPLOYEE'})).id
 			};
-			try {
-				let emp = await Employee.create(empData);
-				if (!emp) {
-					return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
-				}
+			await EmployeeService.createEmployee(empData,function(err,emp){
+				if(err)
+					return res.serverError(err.message)
 				else{
 					req.emp=emp;
 					res.locals.user = emp;
-					res.cookie('jwt', CipherService.createToken(emp), {
-						secure: req.connection.encrypted ? true : false,
-						httpOnly: true,
-						signed:true
-					});
-					return res.redirect('/home')	
+					try {
+						res.cookie('jwt', CipherService.createToken(emp), {
+							secure: req.connection.encrypted ? true : false,
+							httpOnly: true,
+							signed:true
+						});
+					} catch (err) {
+						console.log('Following error is generated: ' + err);
+						return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
+					}
+					return res.redirect('/home')
 				}
-			} catch (err) {
-				logger.error('Following error is generated: ' + err);
-				return res.serverError("Try <a href='/signup'>Signing up</a>  again! ")
-			}
+			});
+			
 		}
 	},
 
