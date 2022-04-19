@@ -19,9 +19,9 @@ module.exports={
 	},
 
 	manage_leaves: async function(req,res){
-        let pendingLeaves = await Leaves.find({status:'PENDING'});
-        let rejectedLeaves = await Leaves.find({status:'REJECTED'});
-        let approvedLeaves = await Leaves.find({status:'APPROVED'});
+        let pendingLeaves = await Leaves.find({status:'PENDING'}).populate('employee');
+        let rejectedLeaves = await Leaves.find({status:'REJECTED'}).populate('employee');
+        let approvedLeaves = await Leaves.find({status:'APPROVED'}).populate('employee');
         return  res.view('partials/manageLeaveApplication',
             {	
                 layout:"template",
