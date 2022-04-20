@@ -38,7 +38,7 @@
 			type: 'STUDY_LEAVE',
 		});
 	}
-	let adminEmp = Employee.findOne({email:"a@b.c"});
+	let adminEmp = await Employee.findOne({email:"a@b.c"});
 	if(!adminEmp)
 		await EmployeeService.createEmployee({
 			name: 'Admin',
