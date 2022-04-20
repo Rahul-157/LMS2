@@ -2,7 +2,7 @@ module.exports={
     dashboard : async function(req,res){
 		let totalEmp = await Employee.count({});
 		let pendingLeaves = await Leaves.count({status:'PENDING'});
-		let approvedLeaves = await Leaves.count({status:'APPROVEED'});
+		let approvedLeaves = await Leaves.count({status:'APPROVED'});
 		let rejectedLeaves = await Leaves.count({status:'REJECTED'});
 
 		res.view('partials/dashboard',
